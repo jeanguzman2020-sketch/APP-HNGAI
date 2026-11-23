@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
+from streamlit.source_util import page_icon_and_name
 
+st.set_page_config(page_title="Mi app",  page_icon="💊", layout="wide")
 archivo = "Tabla_Preparacion_Antimicrobianos_HNGAI-VERSION 3.xlsx"
 
 df = pd.read_excel(
@@ -9,7 +11,7 @@ df = pd.read_excel(
 )
 
 st.title("Consulta Rápida de Antimicrobianos")
-st.title("HNGAI")
+st.title("FARMACIA - HNGAI")
 
 # Antimicrobiano
 antimicrobiano = st.selectbox(
@@ -35,7 +37,7 @@ if not resultado.empty:
 
     fila = resultado.iloc[0]
 
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([3,2])
 
     with col1:
 
@@ -68,6 +70,10 @@ if not resultado.empty:
         fila["Estabilidad Reconst (T° Amb)"]
     )
 
+    st.write(
+        "Reconstituido refrigerado:",
+        fila["Estabilidad Reconst (Refrig 2-8°C)"]
+    )
     st.write(
         "Diluido T° ambiente:",
         fila["Estabilidad Diluido (T° Amb)"]
